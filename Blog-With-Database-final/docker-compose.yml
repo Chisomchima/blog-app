@@ -1,0 +1,24 @@
+version: "3"
+services:
+  blog-app:
+    image: blog-app
+    stdin_open: true
+    ports: 
+      - "3000:3000"
+    networks:
+      - BLOG-WITH-DATABASE-FINAL
+  
+  mongo:
+    image: mongo:3.6.19-xenial
+    ports:
+      - "27017:27017"
+    networks:
+      - BLOG-WITH-DATABASE-FINAL
+    volumes:
+      - mongo-data:/data/db
+networks:
+  BLOG-WITH-DATABASE-FINAL:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local
